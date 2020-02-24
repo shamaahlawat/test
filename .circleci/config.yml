@@ -6,21 +6,22 @@ jobs:
     working_directory: ~/repo
     restore_cache:
         keys:
-           - v1-dependencies-{{ checksum "yarn.lock" }} 
+          - v1-dependencies-{{ checksum "yarn.lock"}}
     steps:
         - checkout
         - run:
             name: Install Deps
             command: yarn
-        - run:
-            name: Run tests
-            command: yarn test
         - save_cache:
             paths:
                 - node_modules
-                key: v1-dependencies-{{ checksum "yarn.lock" }}
+            key: v1-dependencies-{{ checksum "yarn.lock"}}
+        # - run:
+        #     name: Run Tests
+        #     command: yarn test
+        - run: yarn build
         - store_artifacts:
-             path:build
+               path: build
 workflows:
   version: 2
   test:
