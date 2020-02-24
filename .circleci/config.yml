@@ -1,0 +1,19 @@
+version: 2
+jobs:
+  run_test_case:
+    docker:
+        - image: circleci/node:lts
+    working_directory: ~/repo
+    steps:
+        - checkout
+        - run:
+            name: Install Deps
+            command: yarn
+        - run:
+            name: Run tests
+            command: yarn test
+workflows:
+  version: 2
+  test:
+      jobs:
+       - run_test_case
