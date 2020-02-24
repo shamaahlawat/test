@@ -27,3 +27,7 @@ workflows:
   test:
       jobs:
        - run_test_case
+       filters:
+         branches:
+             only:
+                - master-branch
